@@ -1,0 +1,4 @@
+gunicorn==19.3.0
+Flask==0.10.1
+selenium==2.44.0
+PyVirtualDisplay==0.1.5

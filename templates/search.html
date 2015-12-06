@@ -1,0 +1,42 @@
+<!doctype html>
+<title>Search for a VA representative</title>
+<p>
+Search will take 30-60 seconds after "Find Representative" is pressed.<br>
+Results will appear below the search box
+</p>
+<form action="/repfind">
+	Enter Address: <br>
+	<input type="text" name="address">
+	<input type="submit" value="Find Representative">
+</form>
+<p>
+	{% if results %}
+		{% for rep_data in results %}
+			<h2>{{rep_data.title}}</h2>
+			<p>Name: {{rep_data.name}}</p>
+			<p>Party: {{rep_data.party}}</p>
+			{% if rep_data.district %}
+				<p>District: {{rep_data.district}}</p>
+			{% endif %}
+			{% if rep_data.capitol_phone %}
+				<p>Capitol Phone: {{rep_data.capitol_phone}}</p>
+			{% endif %}
+			{% if rep_data.district_phone %}
+				<p>District Phone: {{rep_data.district_phone}}</p>
+			{% endif %}
+			{% if rep_data.email %}
+				<p>Email:  <a href="mailto:{{rep_data.email}}">{{rep_data.email}}</a></p>
+			{% endif %}
+			{% if rep_data.website %}
+				<p>Website: <a href="{{rep_data.website}}">{{rep_data.website}}</a></p>
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+
+	{% if error %}
+	Could not find any representative, make sure to enter an address in the following form: <br>
+	123 Example st. Alexandria, VA 22203 <br>
+	<br>
+	Only addressed in Virginia will work. 
+	{% endif %}
+</p>
